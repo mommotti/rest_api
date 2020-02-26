@@ -13,8 +13,8 @@ router.get('/', async (req, res) => {
 })
 
 // Getting one
-router.get('/:id', async (req, res, next) => {
-
+router.get('/:id', getSubscriber, (req, res) => {
+    res.json(req.subscriber)
 })
 
 // Creating one
@@ -32,11 +32,29 @@ router.post('/', async (req, res) => {
 })
 
 // Updating one
-router.put('/:id', (req, res) => {
+router.patch('/:id', getSubscriber, async (req, res) => {
+    if (req.body.name != null) {
+        res.subscriber.name = req.body.name
+    }
+    if (req.body.subscribedToChannel != null) {
+        res.subscriber.subscribedToChannel = req.body.subscribedToChannel
+    }
+    try {
+        const updatedSubscriber = await res.subscriber.save()
+        res.json(updatedSubscriber)
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
 })
 
 // Deleting one
-router.delete('/:id', (req, res) => {
+router.delete('/:id', getSubscriber, async (req, res) => {
+    try {
+        await res.subscriber.remove()
+        res.json({ message: 'Deleted Subscriber' })
+    } catch (error) {
+        res.status(500).json({ message: err.message })
+    }
 })
 
 

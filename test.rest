@@ -2,7 +2,7 @@ GET http://localhost:3000/subscribers
 
 ###
 
-GET http://localhost:3000/subscribers/1234
+GET http://localhost:3000/subscribers/5e5647f91fbcbf0334963578
 
 ###
 
@@ -10,6 +10,6 @@ POST http://localhost:3000/subscribers
 Content-Type: application/json
 
 {
-    "name": "Nice Person",
-    "subscribedToChannel": "Vsauce"
+    "name": "Aglio Dude",
+    "subscribedToChannel": "Vsauce2"
 }
